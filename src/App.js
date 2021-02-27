@@ -9,6 +9,7 @@ class App extends Component {
 
   handleClickGoodBtn = () => {
     this.setState(prevState => ({ good: prevState.good + 1 }));
+    console.log(0 / 5);
   };
 
   handleClickNeutralBtn = () => {
@@ -18,6 +19,17 @@ class App extends Component {
   handleClickBadBtn = () => {
     this.setState(prevState => ({ bad: prevState.bad + 1 }));
   };
+
+  countTotalFeedback = () =>
+    this.state.good + this.state.neutral + this.state.bad;
+
+  countPositiveFeedbackPercentage = () =>
+    Math.round((this.state.good / this.countTotalFeedback()) * 100);
+
+  setInitialPositiveFeedbackPercentage = () =>
+    this.countTotalFeedback() === 0
+      ? 0
+      : this.countPositiveFeedbackPercentage();
 
   render() {
     return (
@@ -39,6 +51,8 @@ class App extends Component {
         <p>Good: {this.state.good}</p>
         <p>Neutral: {this.state.neutral}</p>
         <p>Bad: {this.state.bad}</p>
+        <p>Total: {this.countTotalFeedback()}</p>
+        <p>Positive feedback: {this.setInitialPositiveFeedbackPercentage()}%</p>
       </div>
     );
   }
