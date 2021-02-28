@@ -1,6 +1,8 @@
+import './Section.css';
+
 const Section = ({ title, children }) => (
   <section>
-    <b>{title}</b>
+    <b className="section-title">{title}</b>
     {children}
   </section>
 );

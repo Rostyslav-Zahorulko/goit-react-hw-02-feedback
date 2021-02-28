@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Statistics from './components/Statistics';
 import FeedbackOptions from './components/FeedbackOptions';
-import Section from './components/Section';
+import Section from './components/Section/';
 
 class App extends Component {
   state = {
@@ -26,14 +26,19 @@ class App extends Component {
     Math.round((this.state.good / this.countTotalFeedback()) * 100);
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <Section title="Please leave feedback">
-        <FeedbackOptions onLeaveFeedback={this.handleOnButtonClick} />
+        <FeedbackOptions
+          options={['good', 'neutral', 'bad']}
+          onLeaveFeedback={this.handleOnButtonClick}
+        />
 
         <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
+          good={good}
+          neutral={neutral}
+          bad={bad}
           total={this.countTotalFeedback()}
           positivePercentage={this.countPositiveFeedbackPercentage()}
         />
